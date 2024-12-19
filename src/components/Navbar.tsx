@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,8 +13,8 @@ export default function Navbar() {
         LOGO
       </div>
 
-      {/* Search Box (Always Visible) */}
-      <div className="flex items-center border-4 border-green-200 px-4 py-2 rounded-full shadow bg-white">
+      {/* Search Box (Always Visible on Desktop) */}
+      <div className="hidden lg:flex items-center border-4 border-green-200 px-4 py-2 rounded-full shadow bg-white">
         <input
           type="text"
           placeholder="Search"
@@ -39,21 +40,33 @@ export default function Navbar() {
           isOpen ? "flex" : "hidden"
         } flex-col lg:flex lg:flex-row lg:items-center lg:space-x-8 text-gray-700 font-semibold absolute lg:static top-[64px] left-0 w-full lg:w-auto bg-white lg:bg-transparent shadow-lg lg:shadow-none p-4 lg:p-0`}
       >
-        <a href="#" className="hover:text-green-500 py-2 lg:py-0 text-center">
+        <Link href="/about-us" className="hover:text-green-500 py-2 lg:py-0 text-center">
           About Us
-        </a>
-        <a href="#" className="hover:text-green-500 py-2 lg:py-0 text-center">
+        </Link>
+        <Link href="/courses" className="hover:text-green-500 py-2 lg:py-0 text-center">
           Courses
-        </a>
-        <a href="#" className="hover:text-green-500 py-2 lg:py-0 text-center">
+        </Link>
+        <Link href="/categories" className="hover:text-green-500 py-2 lg:py-0 text-center">
           Categories
-        </a>
-        <a href="#" className="hover:text-green-500 py-2 lg:py-0 text-center">
+        </Link>
+        <Link href="/blog" className="hover:text-green-500 py-2 lg:py-0 text-center">
           Blog
-        </a>
-        <a href="#" className="hover:text-green-500 py-2 lg:py-0 text-center">
+        </Link>
+        <Link href="/contact" className="hover:text-green-500 py-2 lg:py-0 text-center">
           Contact
-        </a>
+        </Link>
+
+        {/* Search for Mobile */}
+        <div className="flex lg:hidden items-center border-4 border-green-200 px-4 py-2 rounded-full shadow bg-white my-4">
+          <input
+            type="text"
+            placeholder="Search"
+            className="bg-transparent text-gray-400 focus:outline-none text-lg w-full"
+          />
+          <div className="ml-2 w-6 h-6 bg-green-200 rounded-full flex justify-center items-center">
+            <span className="text-gray-700">🔍</span>
+          </div>
+        </div>
 
         {/* Login and Sign-Up Buttons */}
         <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-2 sm:space-y-0 justify-center mt-4 lg:mt-0">
