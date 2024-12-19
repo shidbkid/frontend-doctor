@@ -1,0 +1,17 @@
+.about-us {
+  height: 27px;
+  position: relative;
+  width: 83px;
+}
+
+.about-us .text-wrapper {
+  color: #000000;
+  font-family: "Poppins", Helvetica;
+  font-size: 18px;
+  font-weight: 600;
+  left: 0;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: -1px;
+}
