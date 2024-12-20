@@ -9,7 +9,7 @@ interface CourseCardProps {
 
 const CourseCard: React.FC<CourseCardProps> = ({ title, description, color }) => {
   return (
-    <div className={`p-6 rounded-lg shadow-md ${color} text-white`}>
+    <div className={`p-6 rounded-lg shadow-md ${color} text-black`}>
       <h3 className="text-xl font-bold mb-2">{title}</h3>
       <p>{description}</p>
     </div>
