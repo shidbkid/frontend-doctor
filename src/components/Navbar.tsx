@@ -2,9 +2,19 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true); // Simulate login state
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // For profile dropdown
+  const router = useRouter();
+
+  const handleSignOut = () => {
+    setIsLoggedIn(false); // Update login state
+    setIsDropdownOpen(false); // Close dropdown
+    router.push("/login"); // Redirect to login page
+  };
 
   return (
     <header className="fixed top-0 left-0 w-full flex justify-between items-center px-6 py-4 shadow-md bg-white z-50">
@@ -56,27 +66,51 @@ export default function Navbar() {
           Contact
         </Link>
 
-        {/* Search for Mobile */}
-        <div className="flex lg:hidden items-center border-4 border-green-200 px-4 py-2 rounded-full shadow bg-white my-4">
-          <input
-            type="text"
-            placeholder="Search"
-            className="bg-transparent text-gray-400 focus:outline-none text-lg w-full"
-          />
-          <div className="ml-2 w-6 h-6 bg-green-200 rounded-full flex justify-center items-center">
-            <span className="text-gray-700">🔍</span>
+        {/* Login/Sign-Up or Profile Dropdown */}
+        {!isLoggedIn ? (
+          <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-2 sm:space-y-0 justify-center mt-4 lg:mt-0">
+            <button
+              onClick={() => router.push("/login")}
+              className="bg-green-400 text-white px-4 py-2 rounded-full font-semibold hover:bg-green-500"
+            >
+              Login
+            </button>
+            <button
+              onClick={() => router.push("/signup")}
+              className="bg-white border-4 border-green-400 text-green-400 px-4 py-2 rounded-full font-semibold hover:bg-green-500 hover:text-white"
+            >
+              Sign Up
+            </button>
           </div>
-        </div>
+        ) : (
+          <div className="relative">
+            {/* Profile Icon */}
+            <button
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              className="bg-green-200 w-10 h-10 rounded-full flex justify-center items-center shadow-lg"
+            >
+              <span className="text-gray-800 font-bold">👤</span>
+            </button>
 
-        {/* Login and Sign-Up Buttons */}
-        <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-2 sm:space-y-0 justify-center mt-4 lg:mt-0">
-          <button className="bg-green-400 text-white px-4 py-2 rounded-full font-semibold hover:bg-green-500">
-            Login
-          </button>
-          <button className="bg-white border-4 border-green-400 text-green-400 px-4 py-2 rounded-full font-semibold hover:bg-green-500 hover:text-white">
-            Sign Up
-          </button>
-        </div>
+            {/* Dropdown Menu */}
+            {isDropdownOpen && (
+              <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50">
+                <Link
+                  href="/dashboard"
+                  className="block px-4 py-2 text-gray-700 hover:bg-green-100"
+                >
+                  Your Dashboard
+                </Link>
+                <button
+                  onClick={handleSignOut}
+                  className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-red-100"
+                >
+                  Sign Out
+                </button>
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </header>
   );
