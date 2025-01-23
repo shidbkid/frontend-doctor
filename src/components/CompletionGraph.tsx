@@ -11,21 +11,24 @@ const data = [
 
 export default function CompletionGraph() {
   return (
-    <div className="bg-white p-6 shadow rounded-lg">
-      <h2 className="text-xl font-bold mb-4">Course Completion Progress</h2>
+    <div className=" p-6 shadow-lg rounded-lg text-black">
+      <h2 className="text-2xl font-bold mb-4 text-center">Course Completion Progress</h2>
       <div style={{ width: "100%", height: "400px" }}>
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 50 }}>
             <XAxis
               dataKey="name"
-              tick={{ fontSize: 12 }}
+              tick={{ fontSize: 12, fill: "#000" }} // White labels for X-axis
               interval={0}
               angle={-45}
               textAnchor="end"
             />
-            <YAxis />
-            <Tooltip />
-            <Bar dataKey="completion" fill="#82ca9d" />
+            <YAxis tick={{ fontSize: 12, fill: "#000" }} /> {/* White labels for Y-axis */}
+            <Tooltip
+              contentStyle={{ backgroundColor: "#ffffff", color: "#000000" }} // Tooltip background white
+              cursor={{ fill: "#f1f5f9" }} // Light gray hover effect on bars
+            />
+            <Bar dataKey="completion" fill="#5AB1F3" radius={[4, 4, 0, 0]} /> {/* Hospital blue bars */}
           </BarChart>
         </ResponsiveContainer>
       </div>

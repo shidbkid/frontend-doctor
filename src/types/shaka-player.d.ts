@@ -1,5 +1,5 @@
 declare module "shaka-player" {
-    const shaka: any;
+  //  const shaka: any;
     export default shaka;
   }
   

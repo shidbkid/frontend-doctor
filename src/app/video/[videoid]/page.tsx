@@ -24,7 +24,7 @@ export default function VideoPage() {
   return (
     <div className="p-8">
       <h1 className="text-4xl font-bold mb-6">{video.title}</h1>
-      <VideoPlayer videoUrl={video.url} />
+      <VideoPlayer videoUrl={video.id} />
     </div>
   );
 }

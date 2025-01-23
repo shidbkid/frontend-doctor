@@ -3,42 +3,42 @@
 import React, { useEffect, useRef } from "react";
 import shaka from "shaka-player";
 
-export default function VideoPlayer({ videoUrl }: { videoUrl: string }) {
-  const videoRef = useRef<HTMLVideoElement | null>(null);
+export interface VideoPlayerProps {
+  videoUrl: string;
+}
+
+export default function VideoPlayer({ videoUrl }: VideoPlayerProps) {
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    if (videoRef.current) {
+    const setupPlayer = async () => {
+      if (!videoRef.current) return;
+
       const player = new shaka.Player(videoRef.current);
 
-      // Handle player errors
-      player.addEventListener("error", (event: Event) => {
-        console.error("Shaka Player Error:", event);
-      });
+      try {
+        await player.load(videoUrl);
+        console.log("Video loaded successfully!");
+      } catch (error) {
+        console.error("Error loading video:", error);
+      }
 
-      // Load the video
-      player
-        .load(videoUrl)
-        .then(() => {
-          console.log("Video loaded successfully");
-        })
-        .catch((error: shaka.util.Error) => {
-          console.error("Error loading video:", error);
-        });
-
-      // Cleanup on unmount
       return () => {
-        player.destroy();
+        player.destroy(); // Cleanup
       };
-    }
+    };
+
+    setupPlayer();
   }, [videoUrl]);
 
   return (
-    <div className="w-full h-auto bg-black flex justify-center items-center">
+    <div>
       <video
         ref={videoRef}
-        className="w-full max-w-4xl h-auto"
+        className="w-full h-auto"
         controls
         autoPlay
+        style={{ borderRadius: "8px" }}
       />
     </div>
   );

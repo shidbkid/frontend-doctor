@@ -1,6 +1,7 @@
 "use client";
 
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
+import Layout from "./Layout";
 
 const data = [
   { name: "Introduction to Robotics", timeSpent: 10 },
@@ -10,8 +11,9 @@ const data = [
 
 export default function TimeSpent() {
   return (
+    <Layout>
     <div className="bg-white p-6 shadow rounded-lg">
-      <h2 className="text-xl font-bold mb-4">Time Spent on Each Course</h2>
+      <h2 className="text-xl font-bold mb-4 text-center">Time Spent on Each Course</h2>
       <ResponsiveContainer width="100%" height={300}>
         <BarChart
           data={data}
@@ -21,9 +23,10 @@ export default function TimeSpent() {
           <XAxis type="number" tick={{ fontSize: 12 }} />
           <YAxis dataKey="name" type="category" tick={{ fontSize: 12 }} width={150} />
           <Tooltip />
-          <Bar dataKey="timeSpent" fill="#8884d8" />
+          <Bar dataKey="timeSpent" fill="#5AB1F3" />
         </BarChart>
       </ResponsiveContainer>
     </div>
+    </Layout>
   );
 }

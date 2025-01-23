@@ -13,6 +13,11 @@ module.exports = {
   			sm: 'calc(var(--radius) - 4px)'
   		},
   		colors: {
+			hospitalBlue: {
+				DEFAULT: "#5AB1F3", // Base color
+				hover: "#4A9ED6",   // Hover effect
+				active: "#3A8BCC",  // Active state
+				},
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
