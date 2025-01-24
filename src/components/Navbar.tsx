@@ -53,9 +53,6 @@ export default function Navbar() {
         <Link href="/about-us" className="hover:text-gray-300 py-2 lg:py-0 text-center">
           About Us
         </Link>
-        <Link href="/courses" className="hover:text-gray-300 py-2 lg:py-0 text-center">
-          Courses
-        </Link>
         <Link href="/categories" className="hover:text-gray-300 py-2 lg:py-0 text-center">
           Categories
         </Link>
