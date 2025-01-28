@@ -1,7 +1,6 @@
 "use client";
 
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
-import Layout from "./Layout";
 
 const data = [
   { name: "Introduction to Robotics", timeSpent: 10 },
@@ -11,7 +10,6 @@ const data = [
 
 export default function TimeSpent() {
   return (
-    <Layout>
     <div className="bg-white p-6 shadow rounded-lg">
       <h2 className="text-xl font-bold mb-4 text-center">Time Spent on Each Course</h2>
       <ResponsiveContainer width="100%" height={300}>
@@ -27,6 +25,5 @@ export default function TimeSpent() {
         </BarChart>
       </ResponsiveContainer>
     </div>
-    </Layout>
   );
 }

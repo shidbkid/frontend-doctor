@@ -21,13 +21,20 @@
     "recharts": "^2.15.0",
     "shaka-player": "^4.13.0",
     "tailwind-merge": "^2.6.0",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "video.js": "^7.21.6",
+    "videojs-contrib-quality-levels": "^3.0.0",
+    "videojs-http-source-selector": "^1.1.6",
+    "videojs-seek-buttons": "^3.0.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@types/d3-array": "^3.2.1",
+    "@types/json-schema": "^7.0.15",
     "@types/node": "^20",
-    "@types/react": "^19.0.1",
-    "@types/react-dom": "^19.0.2",
+    "@types/react": "^19.0.8",
+    "@types/react-dom": "^19.0.3",
+    "@types/video.js": "^7.3.58",
     "autoprefixer": "^10.4.20",
     "eslint": "^9",
     "eslint-config-next": "15.1.0",
