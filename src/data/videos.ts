@@ -1,7 +1,38 @@
-export const videos = [
-    { id: "video1", title: "Introduction", url: "/videos/1.mp4", description: "Overview of cardiothoracic basics." },
-    { id: "video2", title: "Heart Anatomy", url: "/videos/1.mp4", description: "Learn about the anatomy of the heart." },
-    { id: "video4", title: "Surgical Techniques", url: "/videos/1.mp4", description: "Surgical procedures explained." },
-    { id: "video3", title: "Surgical Techniques", url: "/videos/1.mp4", description: "Surgical procedures explained." },
-  ];
-  
+import axios from "axios";
+import API_BASE_URL from "@/config/apiConfig";
+
+export interface Video {
+  id: number;
+  title: string;
+  description: string;
+  url: string;
+  thumbnailUrl: string | null;
+  duration: number;
+  status: string;
+  views: number;
+  likes: number;
+  dislikes: number;
+  createdAt: string;
+  updatedAt: string;
+  module: {
+    id: number;
+    title: string;
+    course: {
+      id: number;
+      title: string;
+    };
+  };
+}
+
+// Fetch all videos in a given module
+export const fetchVideosByModuleId = async (moduleId: number): Promise<Video[]> => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/videos`, {
+      params: { moduleId }, // Query videos by module ID
+    });
+    return response.data;
+  } catch (error) {
+    console.error("❌ Error fetching videos:", error);
+    throw new Error("Failed to load videos");
+  }
+};

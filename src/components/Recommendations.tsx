@@ -14,7 +14,7 @@ export default function Recommendations() {
             key={item.id}
             title={item.title}
             description={item.description}
-            color={item.color}
+         
           />
         ))}
       </div>

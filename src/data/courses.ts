@@ -1,66 +1,36 @@
-export const courses = [
-    {
-      id: "cardiothoracic-101",
-      title: "Introduction to Cardiothoracic Surgery",
-      description: "A foundational course on heart and lung surgeries.",
-      categoryId: "cardiothoracic",
-      color: "bg-red-500",
-    },
-    {
-      id: "cardiothoracic-102",
-      title: "Advanced Cardiothoracic Techniques",
-      description: "Dive deeper into complex procedures in cardiothoracic surgery.",
-      categoryId: "cardiothoracic",
-      color: "bg-blue-900",
-    },
-    {
-      id: "orthopedic-101",
-      title: "Basics of Orthopedic Surgery",
-      description: "Learn modern orthopedic techniques like joint replacements.",
-      categoryId: "orthopedic",
-      color: "bg-orange-500",
-    },
-    {
-      id: "orthopedic-102",
-      title: "Joint Replacement Techniques",
-      description: "Master cutting-edge techniques for joint replacement surgeries.",
-      categoryId: "orthopedic",
-      color: "bg-purple-500",
-    },
-    {
-      id: "neurosurgery-101",
-      title: "Introduction to Neurosurgery",
-      description: "Explore techniques for treating brain and spinal cord disorders.",
-      categoryId: "neurosurgery",
-      color: "bg-green-500",
-    },
-    {
-      id: "neurosurgery-102",
-      title: "Advanced Neurosurgical Procedures",
-      description: "Learn cutting-edge techniques in neurosurgery.",
-      categoryId: "neurosurgery",
-      color: "bg-teal-500",
-    },
-    {
-      id: "plastic-101",
-      title: "Introduction to Plastic Surgery",
-      description: "Learn the basics of reconstructive and cosmetic surgery.",
-      categoryId: "plastic",
-      color: "bg-pink-500",
-    },
-    {
-      id: "pediatric-101",
-      title: "Pediatric Surgical Essentials",
-      description: "Specialized surgical techniques for infants and children.",
-      categoryId: "pediatric",
-      color: "bg-yellow-500",
-    },
-    {
-      id: "general-101",
-      title: "Foundations of General Surgery",
-      description: "Master the basics of general surgical procedures.",
-      categoryId: "general",
-      color: "bg-gray-500",
-    },
-  ];
-  
+import axios from "axios";
+import API_BASE_URL from "@/config/apiConfig";
+
+export interface Course {
+  id: number;
+  title: string;
+  description: string;
+  instructor: {
+    id: number;
+    username: string;
+    email: string;
+    role: string;
+  };
+  category: {
+    id: number;
+    name: string;
+  };
+}
+
+export const fetchCourses = async (categoryId: number): Promise<Course[]> => {
+  try {
+    console.log(`Fetching courses for category ${categoryId} from:`, `${API_BASE_URL}/courses?categoryId=${categoryId}`);
+    const response = await axios.get(`${API_BASE_URL}/courses`, {
+      params: { categoryId }, // Send categoryId as query param
+    });
+    console.log("✅ Fetched courses:", response.data);
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.error("❌ Error fetching courses:", error.response?.data || error.message);
+    } else {
+      console.error("❌ Error fetching courses:", error);
+    }
+    throw new Error("Failed to load courses");
+  }
+};

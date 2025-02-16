@@ -1,16 +1,34 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { modules } from "@/data/modules";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import Layout from "@/components/Layout"; // Import the Layout component
+import Layout from "@/components/Layout";
+import { fetchModules, Module } from "@/data/modules";
 
 export default function ModulesPage() {
   const searchParams = useSearchParams();
-  const courseId = searchParams.get("courseId"); // Extract the courseId from the query
+  const courseId = searchParams.get("courseId");
 
-  // Filter modules for the given courseId
-  const filteredModules = modules.filter((module) => module.courseId === courseId);
+  const [modules, setModules] = useState<Module[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    if (!courseId) return;
+
+    setLoading(true);
+    fetchModules(parseInt(courseId))
+      .then((data) => {
+        setModules(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("❌ Fetch error:", err.message);
+        setError("Failed to load modules.");
+        setLoading(false);
+      });
+  }, [courseId]);
 
   if (!courseId) {
     return (
@@ -24,7 +42,27 @@ export default function ModulesPage() {
     );
   }
 
-  if (filteredModules.length === 0) {
+  if (loading) {
+    return (
+      <Layout>
+        <div className="text-center mt-16">
+          <h2 className="text-2xl font-semibold text-gray-800">Loading modules...</h2>
+        </div>
+      </Layout>
+    );
+  }
+
+  if (error) {
+    return (
+      <Layout>
+        <div className="text-center mt-16">
+          <h2 className="text-2xl font-semibold text-red-500">{error}</h2>
+        </div>
+      </Layout>
+    );
+  }
+
+  if (modules.length === 0) {
     return (
       <Layout>
         <div className="text-center mt-16">
@@ -43,7 +81,7 @@ export default function ModulesPage() {
           Modules
         </h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredModules.map((module) => (
+          {modules.map((module) => (
             <Link
               key={module.id}
               href={`/categories/courses/modules/modules_videos?moduleId=${module.id}`}

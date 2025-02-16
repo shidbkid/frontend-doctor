@@ -1,5 +1,7 @@
 "use client";
 
+
+
 import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -50,7 +52,7 @@ export default function Navbar() {
           isOpen ? "flex" : "hidden"
         } flex-col lg:flex lg:flex-row lg:items-center lg:space-x-8 absolute lg:static top-[64px] left-0 w-full lg:w-auto bg-hospitalBlue lg:bg-transparent shadow-lg lg:shadow-none p-4 lg:p-0`}
       >
-        <Link href="/about-us" className="hover:text-gray-300 py-2 lg:py-0 text-center">
+        <Link href="/about" className="hover:text-gray-300 py-2 lg:py-0 text-center">
           About Us
         </Link>
         <Link href="/categories" className="hover:text-gray-300 py-2 lg:py-0 text-center">
